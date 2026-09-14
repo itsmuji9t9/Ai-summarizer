@@ -25,7 +25,7 @@ document.getElementById('summarizeBtn').addEventListener('click', async () => {
 
     try {
         // REPLACE THIS URL WITH YOUR LIVE RENDER LINK
-        const response = await fetch('https://YOUR_RENDER_URL.onrender.com/api/summarize', {
+        const response = await fetch('https://ai-summarizer-vjyt.onrender.com/api/summarize', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: textInput })
