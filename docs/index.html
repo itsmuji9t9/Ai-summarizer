@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Summarizer Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Imports library to convert markdown (**bold**) into proper HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ AI Summarizer</h1>
+            <p>By Mujahid Ali.</p>
+        </div>
+        
+        <textarea id="inputText" placeholder="Paste the text you want summarized here..."></textarea>
+        
+        <button id="summarizeBtn">
+            <span id="btnText">Summarize Text</span>
+            <div id="btnSpinner" class="spinner hidden"></div>
+        </button>
+        
+        <div class="output-section">
+            <h2>Summary Output</h2>
+            <div class="summary-box">
+                <!-- Bouncing dots animation -->
+                <div id="loadingAnim" class="loading-pulse hidden">
+                    <div class="pulse-dot"></div>
+                    <div class="pulse-dot"></div>
+                    <div class="pulse-dot"></div>
+                </div>
+                <div id="outputText">Your formatted summary will appear here.</div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
