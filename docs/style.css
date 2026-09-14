@@ -1,60 +1,77 @@
 :root {
-    --bg-dark: #09090b; /* Deep Vercel-style black */
-    --surface-dark: #18181b;
+    --bg-dark: #050505;
     --primary: #8b5cf6;
     --primary-hover: #7c3aed;
+    --laser-color: #3b82f6;
     --text-main: #f4f4f5;
     --text-muted: #a1a1aa;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem; overflow-x: hidden; }
+body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1rem; overflow-x: hidden; position: relative; }
 
-.app-wrapper { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 2rem; margin-top: 4vh; }
+/* 1. Ambient Background Animations */
+.orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; z-index: -1; animation: drift 10s infinite alternate ease-in-out; }
+.orb-1 { width: 400px; height: 400px; background: var(--primary); top: -10%; left: -10%; }
+.orb-2 { width: 350px; height: 350px; background: var(--laser-color); bottom: -10%; right: -10%; animation-delay: -5s; }
+
+@keyframes drift {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, 30px) scale(1.1); }
+    100% { transform: translate(-30px, -50px) scale(0.9); }
+}
+
+/* 2. Spinning Laser Border Wrapper */
+.laser-wrapper { position: relative; width: 100%; max-width: 800px; border-radius: 24px; padding: 2px; overflow: hidden; box-shadow: 0 0 40px rgba(139, 92, 246, 0.15); margin-top: 2vh; }
+.laser-wrapper::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: conic-gradient(transparent, transparent, transparent, var(--primary), var(--laser-color), transparent);
+    animation: spin-laser 4s linear infinite; z-index: 0;
+}
+@keyframes spin-laser { 100% { transform: rotate(360deg); } }
+
+/* 3. Glassmorphism App Container */
+.app-wrapper { position: relative; background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(20px); border-radius: 22px; padding: 2.5rem; z-index: 1; display: flex; flex-direction: column; gap: 2rem; }
 
 .header { text-align: center; }
-.header h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; background: linear-gradient(to right, #a78bfa, #8b5cf6); -webkit-background-clip: text; color: transparent; }
-.header p { color: var(--text-muted); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
+.header h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; background: linear-gradient(to right, #a78bfa, #60a5fa); -webkit-background-clip: text; color: transparent; text-shadow: 0 0 20px rgba(167, 139, 250, 0.3); }
+.header p { color: var(--text-muted); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
 
 .main-content { display: flex; flex-direction: column; gap: 1.5rem; }
 
-/* Input Area matches the dark AI chat vibe */
-.input-group { position: relative; background: var(--surface-dark); border: 1px solid #27272a; border-radius: 16px; padding: 1rem; transition: border-color 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-.input-group:focus-within { border-color: var(--primary); }
+/* 4. Glass Input Group */
+.input-group { position: relative; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 1rem; transition: all 0.3s ease; }
+.input-group:focus-within { border-color: rgba(139, 92, 246, 0.5); background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.05); }
 
-textarea { width: 100%; height: 220px; background: transparent; border: none; color: var(--text-main); font-size: 1.1rem; line-height: 1.6; resize: vertical; outline: none; padding-bottom: 4rem; }
+textarea { width: 100%; height: 220px; background: transparent; border: none; color: var(--text-main); font-size: 1.1rem; line-height: 1.6; resize: none; outline: none; padding-bottom: 4rem; }
 textarea::placeholder { color: #52525b; }
 
-/* Funny / Playful Button Animation */
-.bouncy-btn { position: absolute; bottom: 1rem; right: 1rem; background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 99px; font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.bouncy-btn:hover { background: var(--primary-hover); transform: translateY(-4px) scale(1.05); box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4); }
-/* The playful click squish and tilt */
-.bouncy-btn:active { transform: translateY(2px) scale(0.9) rotate(-4deg); transition: all 0.1s; } 
-.bouncy-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none; }
+/* 5. Glowing Bouncy Button */
+.bouncy-btn { position: absolute; bottom: 1rem; right: 1rem; background: linear-gradient(135deg, var(--primary), var(--laser-color)); color: white; border: none; padding: 0.75rem 1.75rem; border-radius: 99px; font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); }
+.bouncy-btn:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 10px 25px rgba(139, 92, 246, 0.5), 0 0 15px rgba(59, 130, 246, 0.5); }
+.bouncy-btn:active { transform: translateY(2px) scale(0.95); } 
+.bouncy-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none; filter: grayscale(50%); }
 
-/* Smooth Output Reveal */
-.output-section { background: var(--surface-dark); border: 1px solid #27272a; border-radius: 16px; padding: 2rem; min-height: 120px; opacity: 0; transform: translateY(20px); animation: slideUpFade 0.5s forwards ease-out; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.output-section { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 2rem; min-height: 120px; opacity: 0; transform: translateY(20px); animation: slideUpFade 0.5s forwards ease-out; }
 .output-section.hidden { display: none; animation: none; }
-
 @keyframes slideUpFade { to { opacity: 1; transform: translateY(0); } }
 
 .summary-content { font-size: 1.1rem; line-height: 1.7; color: #e4e4e7; }
-
 .spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .hidden { display: none !important; }
 
-/* Playful, Exaggerated Loading Dots */
+/* Exaggerated Loading Dots */
 .loading-pulse { display: flex; justify-content: center; align-items: center; gap: 10px; height: 100%; min-height: 60px; }
-.pulse-dot { width: 14px; height: 14px; background: var(--primary); border-radius: 50%; animation: bouncy-pulse 0.8s infinite cubic-bezier(0.45, 0, 0.55, 1) alternate; }
+.pulse-dot { width: 14px; height: 14px; background: var(--primary); border-radius: 50%; animation: bouncy-pulse 0.8s infinite cubic-bezier(0.45, 0, 0.55, 1) alternate; box-shadow: 0 0 10px var(--primary); }
 .pulse-dot:nth-child(2) { animation-delay: 0.15s; }
-.pulse-dot:nth-child(3) { animation-delay: 0.3s; }
-@keyframes bouncy-pulse { 0% { transform: translateY(0) scale(0.8); } 100% { transform: translateY(-18px) scale(1.2); background: #a78bfa; } }
+.pulse-dot:nth-child(3) { animation-delay: 0.3s; background: var(--laser-color); box-shadow: 0 0 10px var(--laser-color); }
+@keyframes bouncy-pulse { 0% { transform: translateY(0) scale(0.8); } 100% { transform: translateY(-18px) scale(1.2); } }
 
-/* Mobile Adaptability */
 @media (max-width: 600px) {
-    .app-wrapper { margin-top: 1vh; }
+    .laser-wrapper { padding: 1.5px; border-radius: 18px; margin-top: 0; }
+    .app-wrapper { padding: 1.5rem; border-radius: 16.5px; }
     .header h1 { font-size: 2rem; }
     .bouncy-btn { width: calc(100% - 2rem); justify-content: center; bottom: 1rem; left: 1rem; right: 1rem; }
     textarea { height: 260px; padding-bottom: 4.5rem; }

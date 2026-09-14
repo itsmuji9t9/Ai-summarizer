@@ -9,30 +9,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-wrapper">
-        <header class="header">
-            <h1>✨ AI Summarizer</h1>
-            <p>By Mujahid Ali</p>
-        </header>
-        
-        <main class="main-content">
-            <div class="input-group">
-                <textarea id="inputText" placeholder="Paste your text here to distill it down to its absolute essence..."></textarea>
-                <button id="summarizeBtn" class="bouncy-btn">
-                    <span id="btnText">Summarize</span>
-                    <div id="btnSpinner" class="spinner hidden"></div>
-                </button>
-            </div>
+    <!-- Animated Ambient Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-            <div id="outputSection" class="output-section hidden">
-                <div id="loadingAnim" class="loading-pulse hidden">
-                    <div class="pulse-dot"></div>
-                    <div class="pulse-dot"></div>
-                    <div class="pulse-dot"></div>
+    <div class="laser-wrapper">
+        <div class="app-wrapper">
+            <header class="header">
+                <h1>✨ AI Summarizer</h1>
+                <p>By Mujahid Ali</p>
+            </header>
+            
+            <main class="main-content">
+                <div class="input-group">
+                    <textarea id="inputText" placeholder="Enter your text to initialize the summarization sequence..."></textarea>
+                    <button id="summarizeBtn" class="bouncy-btn">
+                        <span id="btnText">Summarize</span>
+                        <div id="btnSpinner" class="spinner hidden"></div>
+                    </button>
                 </div>
-                <div id="outputText" class="summary-content"></div>
-            </div>
-        </main>
+
+                <div id="outputSection" class="output-section hidden">
+                    <div id="loadingAnim" class="loading-pulse hidden">
+                        <div class="pulse-dot"></div>
+                        <div class="pulse-dot"></div>
+                        <div class="pulse-dot"></div>
+                    </div>
+                    <div id="outputText" class="summary-content"></div>
+                </div>
+            </main>
+        </div>
     </div>
     <script src="app.js"></script>
 </body>
