@@ -11,14 +11,14 @@ async def get_ai_summary(text: str) -> str:
     if not client:
         return "Error: API_KEY is missing. Please check your .env file."
     
-    # Let the AI breathe: Focus on natural flow, clear context, and organic brevity
+    # Balanced length constraint: Just slightly shorter than the original, not too compressed
     prompt_instruction = (
         "You are an expert human editor. Summarize the following text naturally and fluidly.\n\n"
-        "Rules for the summary:\n"
-        "1. Flow & Tone: Write a single, well-crafted paragraph that reads naturally. Do NOT sound robotic or disjointed.\n"
-        "2. Vocabulary: Use clear, everyday language that is easy to understand, but absolutely maintain the core meaning, context, and nuance of the original text.\n"
-        "3. Organic Length: Keep it concise (roughly 10% to 15% of the original). If the input text is very short, write a natural 2-3 sentence summary that actually explains the point rather than cutting it off abruptly.\n"
-        "4. Strict Formatting: Provide ONLY the summary text. No labels, no bullet points, no introductory fluff like 'Here is a summary'.\n\n"
+        "Strict Rules:\n"
+        "1. Flow & Tone: Write a smooth, well-crafted paragraph in a natural tone.\n"
+        "2. Balanced Length: Make it **just slightly shorter** than the original text (trim away minor fluff, but keep all core context and details intact). Avoid making it a single abrupt line.\n"
+        "3. Language: Match the language of the input text completely (keep the easy wording and natural flow).\n"
+        "4. Strict Formatting: Provide ONLY the summary text. No bullet points, no headings, and no introductory filler.\n\n"
         f"Original Text:\n{text}"
     )
     
